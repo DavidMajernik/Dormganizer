@@ -9,13 +9,7 @@
     <option name="priority" value="Medium" />
     <option name="excludeFilter" value="" />
   </component>
-  <component name="FormatOnSaveOptions">
-    <option name="myRunOnSave" value="true" />
-  </component>
-  <component name="KubernetesApiProvider">{}</component>
-  <component name="OptimizeOnSaveOptions">
-    <option name="myRunOnSave" value="true" />
-  </component>
+  <component name="KubernetesApiProvider"><![CDATA[{}]]></component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state>
