@@ -49,11 +49,35 @@ app.post('/api/search', async (req, res) => {
             const $heightVal = $height.slice(0, $height.indexOf('"')+1);
             subArr.height = $heightVal;
             
+            const $width = $('span.pip-product-dimensions__measurement-name:contains("Width")').parent().text();
             const $bedWidthVal = $('span.pip-product-dimensions__measurement-name:contains("Bed width")').parent().text();
-            subArr.width = $bedWidthVal;
+
+            if($width != ""){
+                const $widthVal = $width.slice(0, $width.indexOf('"')+1);
+                subArr.width = $widthVal;
+            }
+            if($bedWidthVal != ""){
+                subArr.width = $bedWidthVal;
+                
+            }
             
-            const $bedLengthVal = $('span.pip-product-dimensions__measurement-name:contains("Bed length")').parent().text();
-            subArr.length = $bedLengthVal;
+            const $length = $('span.pip-product-dimensions__measurement-name:contains("ength")').parent().text();
+            const $depth = $('span.pip-product-dimensions__measurement-name:contains("epth")').parent().text();
+            //const $bedLengthVal = $('span.pip-product-dimensions__measurement-name:contains("Bed length")').parent().text();
+            
+            if($length != ""){
+                const $lengthVal = $length.slice(0, $length.indexOf('"')+1);
+                subArr.length = $lengthVal;
+            }
+            if($depth != ""){
+                const $depthVal = $depth.slice(0, $depth.indexOf('"')+1);
+                subArr.length = $depthVal;
+            }
+            // if($bedLengthVal !== undefined){
+            //     subArr.length = $bedLengthVal;
+            // }
+            
+            
 
             return subArr;
         }));

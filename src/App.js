@@ -102,6 +102,7 @@ function App() {
                     <div key = {result.id}>
                         <h3>{result.name}</h3>
                         <img style={{ width: "50%", height: "50%" }} src={result.contextualImageUrl} alt="Product" />
+                        <p>IKEA</p>
                         <p>${result.price}</p>
                         <p>{result.height}</p>
                         <p>{result.width}</p>
