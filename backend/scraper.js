@@ -32,6 +32,7 @@ app.post('/api/search', async (req, res) => {
             const subArr = {
                 name: queryResponse.name,
                 id: queryResponse.id,
+                price:queryResponse.salesPrice.numeral,
                 pipUrl: queryResponse.pipUrl,
                 contextualImageUrl: queryResponse.contextualImageUrl,
                 ratingValue: queryResponse.ratingValue,

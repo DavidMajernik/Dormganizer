@@ -101,9 +101,12 @@ function App() {
                 {results.map(result => (
                     <div key = {result.id}>
                         <h3>{result.name}</h3>
-                        <p>Height: {result.height}</p>
-                        <p>Width: {result.width}</p>
-                        <p>Length: {result.length}</p>
+                        <img style={{ width: "50%", height: "50%" }} src={result.contextualImageUrl} alt="Product" />
+                        <p>${result.price}</p>
+                        <p>{result.height}</p>
+                        <p>{result.width}</p>
+                        <p>{result.length}</p>
+
                     </div>
                 ))}
             </Container>
