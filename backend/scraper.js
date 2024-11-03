@@ -63,7 +63,7 @@ app.post('/api/search', async (req, res) => {
             
             const $length = $('span.pip-product-dimensions__measurement-name:contains("ength")').parent().text();
             const $depth = $('span.pip-product-dimensions__measurement-name:contains("epth")').parent().text();
-            //const $bedLengthVal = $('span.pip-product-dimensions__measurement-name:contains("Bed length")').parent().text();
+            const $bedLengthVal = $('span.pip-product-dimensions__measurement-name:contains("Bed length")').parent().text();
             
             if($length != ""){
                 const $lengthVal = $length.slice(0, $length.indexOf('"')+1);
@@ -73,9 +73,9 @@ app.post('/api/search', async (req, res) => {
                 const $depthVal = $depth.slice(0, $depth.indexOf('"')+1);
                 subArr.length = $depthVal;
             }
-            // if($bedLengthVal !== undefined){
-            //     subArr.length = $bedLengthVal;
-            // }
+            if($bedLengthVal != ""){
+                subArr.length = $bedLengthVal;
+            }
             
             
 
