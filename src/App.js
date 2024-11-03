@@ -102,7 +102,7 @@ function App() {
                     result.name !== "" ? (
                         <div key = {result.id}>
                             <h3>{result.name}</h3>
-                            <img style={{ width: "50%", height: "50%" }} src={result.contextualImageUrl} alt="Product" />
+                            <a href={result.pipUrl}><img style={{ width: "50%", height: "50%" }} src={result.contextualImageUrl} alt="Product" /></a>
                             <p>IKEA</p>
                             <p>{result.price}</p>
                             <p>{result.height}</p>
