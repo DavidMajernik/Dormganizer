@@ -11,8 +11,11 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
     "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
     "json2csv": "^6.0.0-alpha.2",
     "jsonfile": "^6.1.0",
+    "node-fetch": "^3.3.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
@@ -41,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-private-property-in-object": "^7.25.9"
   }
 }

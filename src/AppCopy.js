@@ -1,13 +1,11 @@
 import React, {useState} from "react";
 import Container from "@mui/material/Container"
 
-
 function App() {
     const [searchItem, setSearchItem] = useState('')
     const [searchItem2, setSearchItem2] = useState('')
     const [searchItem3, setSearchItem3] = useState('')
     const [searchItem4, setSearchItem4] = useState('')
-    const [results, setResults] = useState([])
 
 
     const Header = () => {
@@ -39,22 +37,9 @@ function App() {
         setSearchItem4(searchTerm4)
     }
 
-    const onSearch = async () => {
-        try {
-            const response = await fetch('http://localhost:5000/api/search', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({query: searchItem}),
-            })
-            const data = await response.json()
-            console.log(data);
-            setResults(data)
-        } catch (error){
-            console.error("Error fetching results:", error)
-        }
+    const onSearch= () => {
         console.log(searchItem)
     }
-    
 
     return (
         <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 10}}>
@@ -96,16 +81,6 @@ function App() {
                     /> 
                     <button onClick={onSearch}>Search</button> 
                 </div>
-            </Container>
-            <Container>
-                {results.map(result => (
-                    <div key = {result.id}>
-                        <h3>{result.name}</h3>
-                        <p>Height: {result.height}</p>
-                        <p>Width: {result.width}</p>
-                        <p>Length: {result.length}</p>
-                    </div>
-                ))}
             </Container>
         </div>
 
