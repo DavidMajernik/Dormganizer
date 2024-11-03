@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import jsonfile from 'jsonfile';
 import * as cheerio from 'cheerio';
-import fetch from 'node-fetch'; // ESM import
+import fetch from 'node-fetch'; 
 
 const app = express();
 const PORT =  5000;
@@ -12,6 +12,28 @@ app.use(express.json());
 
 app.post('/api/search', async (req, res) => {
     const query = req.body.query;
+    
+    var heightReq;
+    if(req.body.height == null || req.body.height == ""){
+        heightReq = 9999999;
+    }else{
+        heightReq = req.body.height;
+    }
+    var widthReq;
+    if(req.body.width == null || req.body.width == ""){
+        widthReq = 9999999;
+    }else{
+        widthReq = req.body.width;
+    }
+    var lengthReq;
+    if(req.body.length == null || req.body.length == ""){
+        lengthReq = 9999999;
+    }else{
+        lengthReq = req.body.length;
+    }
+    
+    
+
 
     try {
 
@@ -32,7 +54,7 @@ app.post('/api/search', async (req, res) => {
             const subArr = {
                 name: queryResponse.name,
                 id: queryResponse.id,
-                price:queryResponse.salesPrice.numeral,
+                price: "$" + queryResponse.salesPrice.numeral,
                 pipUrl: queryResponse.pipUrl,
                 contextualImageUrl: queryResponse.contextualImageUrl,
                 ratingValue: queryResponse.ratingValue,
@@ -51,7 +73,6 @@ app.post('/api/search', async (req, res) => {
             
             const $width = $('span.pip-product-dimensions__measurement-name:contains("Width")').parent().text();
             const $bedWidthVal = $('span.pip-product-dimensions__measurement-name:contains("Bed width")').parent().text();
-
             if($width != ""){
                 const $widthVal = $width.slice(0, $width.indexOf('"')+1);
                 subArr.width = $widthVal;
@@ -64,7 +85,6 @@ app.post('/api/search', async (req, res) => {
             const $length = $('span.pip-product-dimensions__measurement-name:contains("ength")').parent().text();
             const $depth = $('span.pip-product-dimensions__measurement-name:contains("epth")').parent().text();
             const $bedLengthVal = $('span.pip-product-dimensions__measurement-name:contains("Bed length")').parent().text();
-            
             if($length != ""){
                 const $lengthVal = $length.slice(0, $length.indexOf('"')+1);
                 subArr.length = $lengthVal;
@@ -77,7 +97,54 @@ app.post('/api/search', async (req, res) => {
                 subArr.length = $bedLengthVal;
             }
             
+
+            //Don't return things that are too big .match(/(\d+)/)
+            // const lenFilter = subArr.length.slice($height.indexOf(':')+2, $height.indexOf(' '));
             
+            var lenFilter;
+            try{
+                lenFilter = subArr.length.match(/(\d+)/).slice(0, $height.indexOf(','));
+            }catch{
+                lenFilter = 0;
+            }
+
+            var widFilter;
+            try{
+                widFilter = subArr.width.match(/(\d+)/).slice(0, $height.indexOf(',')); 
+            }catch{
+                widFilter = 0;
+            }
+
+            var hiFilter;
+            try{
+                hiFilter = subArr.height.match(/(\d+)/).slice(0, $height.indexOf(','));
+            }catch{
+                hiFilter = 0;
+            }
+            
+
+            const empty = {
+                name: "",
+                id: "",
+                price:"",
+                pipUrl: queryResponse.pipUrl,
+                contextualImageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png",
+                ratingValue: "",
+                ratingCount: "",
+                height: "",
+                width: "",
+                length: "",
+            };
+
+            if(lenFilter > lengthReq){
+                return empty;
+            }
+            if(widFilter > widthReq){
+                return empty;
+            }
+            if(hiFilter > heightReq){
+                return empty;
+            }
 
             return subArr;
         }));

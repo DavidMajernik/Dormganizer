@@ -44,7 +44,7 @@ function App() {
             const response = await fetch('http://localhost:5000/api/search', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({query: searchItem}),
+                body: JSON.stringify({query: searchItem, height: searchItem2, width: searchItem3, length: searchItem4}),
             })
             const data = await response.json()
             console.log(data);
@@ -97,18 +97,18 @@ function App() {
                     <button onClick={onSearch}>Search</button> 
                 </div>
             </Container>
-            <Container>
+            <Container>  
                 {results.map(result => (
-                    <div key = {result.id}>
-                        <h3>{result.name}</h3>
-                        <img style={{ width: "50%", height: "50%" }} src={result.contextualImageUrl} alt="Product" />
-                        <p>IKEA</p>
-                        <p>${result.price}</p>
-                        <p>{result.height}</p>
-                        <p>{result.width}</p>
-                        <p>{result.length}</p>
-
-                    </div>
+                    result.name !== "" ? (
+                        <div key = {result.id}>
+                            <h3>{result.name}</h3>
+                            <img style={{ width: "50%", height: "50%" }} src={result.contextualImageUrl} alt="Product" />
+                            <p>{result.price}</p>
+                            <p>{result.height}</p>
+                            <p>{result.width}</p>
+                            <p>{result.length}</p>
+                        </div>
+                    ) : null
                 ))}
             </Container>
         </div>
