@@ -13,9 +13,9 @@ function App() {
     const Header = () => {
         return (
             <Container maxWidth="md">
-                <div style={{background: '#004990'}}>
+                <div style={{background: '#004990',textAlign: 'center'}}>
                     <header>
-                        <h1 style={{color: 'white', lineHeight: 1, fontSize: 100, textAlign: 'center'}}>Dormganizer</h1>
+                        <h1 style={{color: 'white', lineHeight: 1.5, fontSize: 100, textAlign: 'center'}}>Dormganizer</h1>
                     </header>
                 </div>
             </Container>
@@ -103,6 +103,7 @@ function App() {
                         <div key = {result.id}>
                             <h3>{result.name}</h3>
                             <img style={{ width: "50%", height: "50%" }} src={result.contextualImageUrl} alt="Product" />
+                            <p>IKEA</p>
                             <p>{result.price}</p>
                             <p>{result.height}</p>
                             <p>{result.width}</p>
